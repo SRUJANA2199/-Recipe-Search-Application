@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Search</title>
+    <header>
+
+        <!-------------- NAVBAR -------------->
+        <style>
+           body {
+            background-color: #ffffff; /* Light grey background for the entire page */
+            color: #333; /* Text color for better readability */
+        }
+           .content-bottom-spacing {
+            margin-bottom: 280px; /* Adjust this value as per your preference */
+        }
+        .navBar h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0; /* Remove default margin */
+    font-size: 30px; /* Adjust as needed */
+    text-align: center;
+    flex-grow: 1;
+}
+            /* Basic styling for the list and search input */
+            footer {
+    padding: 20px;
+    background-color: hsl(180, 60%, 1%); /* Optional background color */
+  }
+  
+  .footerSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #1c1c1e;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .footerLeft {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .footerInfo {
+    margin-right: 20px;
+  }
+  
+  .footerInfoHeading {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .footerContent p {
+    margin: 5px 0;
+  }
+  
+  .footerRight {
+    flex: 1;
+  }
+  
+  .footerExtras {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footerExtras span {
+    display: flex;
+    align-items: center;
+  }
+  
+  .footerExtras i {
+    margin-right: 5px;
+  }
+  
+  .footerExtras img {
+    height: 24px; /* Adjust size as needed */
+    vertical-align: middle;
+  }
+  
+            .image-container {
+              text-align: center; /* Centers the image horizontally */
+              margin: 20px 0; /* Optional: adds space around the image */
+            }
+        
+            #searchInput {
+              margin-bottom: 10px;
+              padding: 5px;
+              width: 100%;
+              box-sizing: border-box;
+            }
+        
+            ul {
+              list-style-type: none;
+              padding: 0;
+              display: none; /* Hide the list by default */
+            }
+        
+            li {
+              padding: 8px;
+              border-bottom: 1px solid #ddd;
+            }
+        
+            /* Flexbox styling for navbar */
+            .navBar {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: 10px 20px;
+              background-color: #fff;
+              border-bottom: 1px solid #ddd;
+            }
+        
+            .navBar .logoSection {
+              flex: 1;
+            }
+        
+            .navBar .loginBox, .navBar .moreBox, .navBar .cartBox {
+              margin-left: 20px;
+            }
+        
+            .navBar h1 {
+              flex: 2;
+              text-align: center;
+              margin: 0;
+            }
+          </style>
+        </head>
+        <body>
+          <header>
+            <div class="navBar">
+              <div class="logoSection">
+                <img src="{{ url_for('static', filename='images/vegan-food.png') }}" alt="Healthy Food" style="width: 100px; height: auto;">
+
+              </div>
+              <h1>EpiRecipes Search Platform</h1>
+              <div class="loginBox">
+                <div class="login">Login</div>
+              </div>
+              <div class="moreBox">
+                <p>More</p>
+              </div>
+              <div class="cartBox">
+                <i class="fa-solid fa-cart-shopping"></i> Save
+              </div>
+            </div>
+          </header>
+   
+    <!-- Search Form -->
+    <form action="/search" method="POST">
+        <input type="text" id="searchInput" name="query" placeholder="Search recipes..." required>
+        <button type="submit">Search</button>
+    </form>
+
+  
+    <ul id="recipe-list">
+        {% for recipe in recipes %}
+            <li>{{ recipe.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Search Results -->
+  
+    <ul id="search-results">
+        <!-- Results will be injected here via JavaScript -->
+    </ul>
+
+
+
+
+
+
+
+
+
+    <!-- First Row -->
+<div style="text-align: center; margin-bottom: 30px;">
+  <div style="display: inline-block; text-align: center; margin-right: 40px;">
+      <img src="{{ url_for('static', filename='images/cake.gif') }}" alt="desserts" style="width: 199px; height: auto;">
+      <p>Desserts</p>
+  </div>
+  
+  <div style="display: inline-block; text-align: center; margin-right: 40px;">
+      <img src="{{ url_for('static', filename='images/juice.gif') }}" alt="juice" style="width: 199px; height: auto;">
+      <p>Juices</p>
+  </div>
+  
+  <div style="display: inline-block; text-align: center;">
+      <img src="{{ url_for('static', filename='images/curry.gif') }}" alt="curry" style="width: 199px; height: auto;">
+      <p>Curry</p>
+  </div>
+</div>
+
+<!-- Second Row -->
+<div style="text-align: center; margin-bottom: 30px;">
+  <div style="display: inline-block; text-align: center; margin-right: 40px;">
+      <img src="{{ url_for('static', filename='images/soup.gif') }}" alt="soup" style="width: 199px; height: auto;">
+      <p>Soup</p>
+  </div>
+ 
+  <div style="display: inline-block; text-align: center;">
+    <img src="{{ url_for('static', filename='images/vegan.gif') }}" alt="vegan" style="width: 199px; height: auto;">
+    <p>Vegan</p>
+</div>
+  
+  
+  <div style="display: inline-block; text-align: center;">
+      <img src="{{ url_for('static', filename='images/ramen.gif') }}" alt="ramen" style="width: 199px; height: auto;">
+      <p>Ramen</p>
+  </div>
+</div>
+
+<!-- Third Row -->
+<div style="text-align: center;">
+  <div style="display: inline-block; text-align: center; margin-right: 40px;">
+      <img src="{{ url_for('static', filename='images/roasted-turkey.gif') }}" alt="roasted turkey" style="width: 199px; height: auto;">
+      <p>Roasted Turkey</p>
+  </div>
+  
+  <div style="display: inline-block; text-align: center; margin-right: 40px;">
+      <img src="{{ url_for('static', filename='images/fried-chicken.gif') }}" alt="fried chicken" style="width: 199px; height: auto;">
+      <p>Fried Chicken</p>
+  </div>
+  
+  <div style="display: inline-block; text-align: center; margin-right: 40px;">
+    <img src="{{ url_for('static', filename='images/meat.gif') }}" alt="meat" style="width: 199px; height: auto;">
+    <p>Meat</p>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="content-bottom-spacing">
+  <!-- This div adds space before the footer -->
+</div>
+
+
+
+    <!-- Display Recipes -->
+  
+    <footer>
+        <div class="footerSection">
+          <div class="footerLeft">
+            <div class="footerInfo">
+              <p class="footerInfoHeading"style="color: #fff;">ABOUT</p>
+              <div class="footerContent">
+                <p class="footerInfoHeading"style="color: #fff;">Contact Us</p>
+                <p class="footerInfoHeading"style="color: #fff;">About Us</p>
+              </div>
+            </div>
+    
+            <div class="footerInfo">
+              <p class="footerInfoHeading"style="color: #fff;">HELP</p>
+              <div class="footerContent">
+                
+                <p class="footerInfoHeading"style="color: #fff;">FAQ</p>
+              </div>
+            </div>
+    
+            <div class="footerInfo">
+              <p class="footerInfoHeading"style="color: #fff;">CONSUMER POLICY</p>
+              <div class="footerContent">
+                <p class="footerInfoHeading"style="color: #fff;">Privacy</p>
+                <p class="footerInfoHeading"style="color: #fff;">Sitemap</p>
+              </div>
+            </div>
+    
+            <div class="footerInfo">
+              <p class="footerInfoHeading"style="color: #fff;">SOCIAL</p>
+              <div class="footerContent">
+                <p class="footerInfoHeading"style="color: #fff;">Facebook</p>
+                <p class="footerInfoHeading"style="color: #fff;">Twitter</p>
+                <p class="footerInfoHeading"style="color: #fff;">YouTube</p>
+              </div>
+            </div>
+          </div>
+    
+          <div class="footerRight"></div>
+        </div>
+        <div class="footerExtras">
+          <span><i class="fa-solid fa-suitcase" style="color: #fcfbf2;"></i> <span style="color: #fff;">Become a Seller</span></span>
+          <span><i class="fa-solid fa-star" style="color: #ececea;"></i> <span style="color: #fff;">Advertise</span></span>
+          <span><i class="fa-solid fa-gift" style="color: #f3f2ed;"></i> <span style="color: #fff;">Contact info</span></span>
+          <span><i class="fa-solid fa-circle-question" style="color: #f0efeb;"></i> <span style="color: #fff;">Help Center</span></span>
+          <span style="color: #fff;">© 2007-2023 </span>
+         
+        </div>
+      
+      </footer>
+
+    <!-- JavaScript for handling search results -->
+    <script>
+      document.getElementById('searchInput').addEventListener('input', function() {
+        var filter = this.value.toLowerCase();
+        var items = document.querySelectorAll('#recipe-list li');
+        var recipeList = document.getElementById('recipe-list');
+  
+        if (filter) {
+          recipeList.style.display = 'block'; // Show the list when there's input
+        } else {
+          recipeList.style.display = 'none'; // Hide the list if there's no input
+        }
+  
+        var found = false; // Track if any item is found
+        items.forEach(function(item) {
+          var text = item.textContent || item.innerText;
+          if (text.toLowerCase().indexOf(filter) > -1) {
+            item.style.display = '';  // Show the matching item
+            found = true;
+          } else {
+            item.style.display = 'none';  // Hide non-matching items
+          }
+        });
+  
+        // If no matching items, hide the entire list
+        if (!found) {
+          recipeList.style.display = 'none';
+        }
+      });
+    </script>
+  
+</body>
+</html>
